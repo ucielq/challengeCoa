@@ -47,7 +47,8 @@ namespace WebApiCOA.Controllers
                 Respuesta oRespuesta = new Respuesta
                 {
                     Status = NotFound(),
-                    Data = null
+                    Data = null,
+                    Error=$"No existe el usuario con id {id}"
                 };
                 return oRespuesta;
             }
@@ -56,6 +57,7 @@ namespace WebApiCOA.Controllers
             {
                 Data = usuario,
                 Status = Ok()
+
             };
         }
 
@@ -81,7 +83,7 @@ namespace WebApiCOA.Controllers
                     return new Respuesta
                     {
                         Status = NotFound(),
-                        Error = e.InnerException.Message
+                        Error = e.Message
                     };
                 }
                 else
@@ -89,7 +91,7 @@ namespace WebApiCOA.Controllers
                     return new Respuesta
                     {
                         Status = new StatusCodeResult(400),
-                        Error = e.InnerException.Message
+                        Error = e.Message
                     };
                 }
             }
